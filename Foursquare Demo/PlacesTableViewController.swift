@@ -15,6 +15,8 @@ class PlacesTableViewController: UITableViewController {
     @IBOutlet weak var filterButton: UIBarButtonItem!
     
     var places:[Place] = []
+    var selectedPlace: Place?
+    
     var cache:NSCache<AnyObject, AnyObject>!
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation?
@@ -83,6 +85,11 @@ class PlacesTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedPlace = self.places[indexPath.row]
+        self.performSegue(withIdentifier: "showMap", sender: nil)
     }
     
     // MARK: - Fetching
@@ -216,6 +223,18 @@ class PlacesTableViewController: UITableViewController {
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    
+     // MARK: - Navigation
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showMap" {
+            let routeVC = segue.destination as! RouteViewController
+            routeVC.place = selectedPlace
+        }
+     
+     }
 }
 
 

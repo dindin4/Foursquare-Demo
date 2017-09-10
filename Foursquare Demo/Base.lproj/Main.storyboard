@@ -121,11 +121,44 @@
                     <connections>
                         <outlet property="filterButton" destination="ESf-8a-Glf" id="3UY-sC-Jxt"/>
                         <outlet property="searchBar" destination="gZU-yE-rvA" id="GeE-ju-Yuq"/>
+                        <segue destination="EbF-Hr-HbO" kind="show" identifier="showMap" id="afu-nZ-1kk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cgy-Xj-zpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1104.8" y="167.76611694152925"/>
+        </scene>
+        <!--Route View Controller-->
+        <scene sceneID="haq-sn-C8j">
+            <objects>
+                <viewController id="EbF-Hr-HbO" customClass="RouteViewController" customModule="Foursquare_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K2q-9m-vqq"/>
+                        <viewControllerLayoutGuide type="bottom" id="d1h-LW-ERt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vlr-Ou-TvV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xq6-z6-xS7">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d1h-LW-ERt" firstAttribute="top" secondItem="xq6-z6-xS7" secondAttribute="bottom" id="0H7-rF-wQV"/>
+                            <constraint firstItem="xq6-z6-xS7" firstAttribute="top" secondItem="K2q-9m-vqq" secondAttribute="bottom" id="2yj-aF-6CK"/>
+                            <constraint firstItem="xq6-z6-xS7" firstAttribute="leading" secondItem="vlr-Ou-TvV" secondAttribute="leading" id="kdz-1q-RrK"/>
+                            <constraint firstAttribute="trailing" secondItem="xq6-z6-xS7" secondAttribute="trailing" id="npt-fq-Lqc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="routeMap" destination="xq6-z6-xS7" id="c7T-ta-uzD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b4A-9V-IFX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1999" y="168"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fwb-CN-KnX">
