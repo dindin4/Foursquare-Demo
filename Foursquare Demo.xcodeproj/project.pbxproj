@@ -12,6 +12,7 @@
 		A3F97BF11F6544AE00D907FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3F97BF01F6544AE00D907FE /* Assets.xcassets */; };
 		A3F97BF41F6544AE00D907FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3F97BF21F6544AE00D907FE /* LaunchScreen.storyboard */; };
 		A3F97BFC1F65473B00D907FE /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F97BFB1F65473B00D907FE /* PlacesTableViewController.swift */; };
+		A3F97BFE1F6548C800D907FE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F97BFD1F6548C800D907FE /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		A3F97BF31F6544AE00D907FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3F97BF51F6544AE00D907FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3F97BFB1F65473B00D907FE /* PlacesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
+		A3F97BFD1F6548C800D907FE /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				A3F97BF21F6544AE00D907FE /* LaunchScreen.storyboard */,
 				A3F97BF51F6544AE00D907FE /* Info.plist */,
 				A3F97BFB1F65473B00D907FE /* PlacesTableViewController.swift */,
+				A3F97BFD1F6548C800D907FE /* Place.swift */,
 			);
 			path = "Foursquare Demo";
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3F97BFE1F6548C800D907FE /* Place.swift in Sources */,
 				A3F97BEA1F6544AE00D907FE /* AppDelegate.swift in Sources */,
 				A3F97BFC1F65473B00D907FE /* PlacesTableViewController.swift in Sources */,
 			);
