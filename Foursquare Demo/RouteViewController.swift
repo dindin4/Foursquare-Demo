@@ -45,6 +45,7 @@ class RouteViewController: UIViewController {
         let request = MKDirectionsRequest()
         request.source = MKMapItem.forCurrentLocation()
         request.destination = destination!
+        request.transportType = .walking
         request.requestsAlternateRoutes = false
         
         let directions = MKDirections(request: request)
@@ -66,7 +67,8 @@ class RouteViewController: UIViewController {
         }
         
         if let locationCoord = userLocation?.coordinate {
-            routeMap.setCenter(locationCoord, animated: true)
+            let viewRegion = MKCoordinateRegionMakeWithDistance(locationCoord, 500, 500)
+            routeMap.setRegion(viewRegion, animated: false)
         }
     }
     
