@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import CoreLocation
 
 class PlacesTableViewController: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    
     var places:[Place] = []
     var cache:NSCache<AnyObject, AnyObject>!
+    var locationManager: CLLocationManager!
+    var currentLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +26,10 @@ class PlacesTableViewController: UITableViewController {
         searchBar.returnKeyType = UIReturnKeyType.done
         
         self.cache = NSCache()
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     // MARK: - Table view data source
@@ -75,8 +83,18 @@ class PlacesTableViewController: UITableViewController {
     // MARK: - Fetching
     
     func fetchPlaces(query: String) {
+        
+        guard let location = self.currentLocation else {
+            let alertController = UIAlertController(title: "Cannot find current location", message: "Try again later", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+        
         places.removeAll()
-        let endpointUrl = "https://api.foursquare.com/v2/venues/explore?ll=51.5007325,-0.1268194&query=\(query)&venuePhotos=1&oauth_token=RURLG2J5JPYY2W5NCHKQY1NLNCJCIS4D50FID0QADDXG1VPW&v=20170909"
+        
+        let endpointUrl = "https://api.foursquare.com/v2/venues/explore?ll=\(location.coordinate.latitude),\(location.coordinate.longitude)&query=\(query)&venuePhotos=1&oauth_token=RURLG2J5JPYY2W5NCHKQY1NLNCJCIS4D50FID0QADDXG1VPW&v=20170909"
         
         guard let endpoint = URL(string: endpointUrl) else {
             print("Cannot create endpoint")
@@ -202,5 +220,44 @@ extension PlacesTableViewController: UISearchBarDelegate{
             }.joined(separator: "+")
         
         self.fetchPlaces(query: encodedQuery)
+    }
+}
+
+extension PlacesTableViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("didFailWithError: \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let latestLocation = locations.last {
+            self.currentLocation = latestLocation
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            // user denied your app access to Location Services, but can grant access from Settings.app
+            let alertController = UIAlertController(title: "Location Services Access Denied", message: "Access to location services has been turned off. Enable them from the settings app to allow location to be accessed", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { (action) in
+                if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            })
+            alertController.addAction(settingsAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+            break
+        default:
+            break
+        }
     }
 }
