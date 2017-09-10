@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class Place: NSObject {
     var name: String!
@@ -15,8 +16,10 @@ class Place: NSObject {
     var distance: Double!
     var imageUrl: String?
     var category: String!
+    var location: CLLocationCoordinate2D!
+    var contactNumber: String?
     
-    init(name:String, rating: Double, ratingHexColor:String, distanceInMetres: Double, imageUrl: String?, category: String) {
+    init(name:String, rating: Double, ratingHexColor:String, distanceInMetres: Double, imageUrl: String?, category: String, locationLat: Double, locationLon: Double, telephone: String?) {
         self.name = name
         self.rating = rating
         self.ratingColor = UIColor(hex: ratingHexColor)
@@ -26,6 +29,9 @@ class Place: NSObject {
         let miles = 0.000621371
         let distanceInMiles = miles * distanceInMetres
         self.distance = distanceInMiles.rounded(toPlaces: 1)
+        
+        self.location = CLLocationCoordinate2D(latitude: locationLat, longitude: locationLon)
+        self.contactNumber = telephone
     }
 
 }

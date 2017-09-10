@@ -120,10 +120,13 @@ class PlacesTableViewController: UITableViewController {
                                 if let venue = item["venue"] as? NSDictionary {
                                     var name = ""
                                     var ratingHexColour = ""
-                                    var imageUrl: String? = ""
+                                    var imageUrl: String? = nil
                                     var category = ""
+                                    var phone: String? = nil
                                     var rating: Double = 0
                                     var distance: Double = 0
+                                    var lat: Double = 0
+                                    var lon: Double = 0
                                     
                                     if let placeName = venue["name"] as? String {
                                         name = placeName
@@ -137,8 +140,10 @@ class PlacesTableViewController: UITableViewController {
                                         ratingHexColour = ratingColour
                                     }
                                     
-                                    if let location = venue["location"] as? NSDictionary, let distanceInMetres = location["distance"] as? Double {
+                                    if let location = venue["location"] as? NSDictionary, let distanceInMetres = location["distance"] as? Double, let locationLat = location["lat"] as? Double, let locationLon = location["lng"] as? Double {
                                         distance = distanceInMetres
+                                        lat = locationLat
+                                        lon = locationLon
                                     }
                                     
                                     if let categories = venue["categories"] as? [NSDictionary], categories.count > 0 {
@@ -153,7 +158,12 @@ class PlacesTableViewController: UITableViewController {
                                             imageUrl = self.constructImageUrl(photoItem: photoGroupItems.first)
                                         }
                                     }
-                                    let place = Place(name: name, rating: rating, ratingHexColor: ratingHexColour, distanceInMetres: distance, imageUrl: imageUrl, category: category)
+                                    
+                                    if let contactDetails = venue["contact"] as? NSDictionary, let phoneNumber = contactDetails["phone"] as? String {
+                                        phone = phoneNumber
+                                    }
+                                    
+                                    let place = Place(name: name, rating: rating, ratingHexColor: ratingHexColour, distanceInMetres: distance, imageUrl: imageUrl, category: category, locationLat: lat,locationLon: lon, telephone: phone)
                                     self.places.append(place)
                                     
                                 }
