@@ -22,6 +22,7 @@ class PlacesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar.barTintColor = UIColor(red: 0.0, green: 0.64, blue: 0.93, alpha: 1)
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
         
@@ -52,7 +53,7 @@ class PlacesTableViewController: UITableViewController {
         // Configure the cell...
         cell.configureCell(place: place)
         
-        cell.placeImageView.image = UIImage(named: "placeholder")
+        cell.placeImageView.image = nil
         
         if let image = self.cache.object(forKey: indexPath.row as AnyObject) as? UIImage {
             cell.placeImageView.image = image
@@ -77,6 +78,10 @@ class PlacesTableViewController: UITableViewController {
                 }).resume()
             }
         }
+        if cell.placeImageView.image == nil {
+            cell.placeImageView.image = UIImage(named: "placeholder")
+        }
+        
         return cell
     }
     
