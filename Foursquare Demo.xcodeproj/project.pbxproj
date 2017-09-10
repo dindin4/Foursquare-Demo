@@ -13,6 +13,7 @@
 		A3F97BF41F6544AE00D907FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3F97BF21F6544AE00D907FE /* LaunchScreen.storyboard */; };
 		A3F97BFC1F65473B00D907FE /* PlacesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F97BFB1F65473B00D907FE /* PlacesTableViewController.swift */; };
 		A3F97BFE1F6548C800D907FE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F97BFD1F6548C800D907FE /* Place.swift */; };
+		A3F97C001F654C3600D907FE /* PlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F97BFF1F654C3600D907FE /* PlaceCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A3F97BF51F6544AE00D907FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3F97BFB1F65473B00D907FE /* PlacesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesTableViewController.swift; sourceTree = "<group>"; };
 		A3F97BFD1F6548C800D907FE /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		A3F97BFF1F654C3600D907FE /* PlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				A3F97BF51F6544AE00D907FE /* Info.plist */,
 				A3F97BFB1F65473B00D907FE /* PlacesTableViewController.swift */,
 				A3F97BFD1F6548C800D907FE /* Place.swift */,
+				A3F97BFF1F654C3600D907FE /* PlaceCell.swift */,
 			);
 			path = "Foursquare Demo";
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 				A3F97BFE1F6548C800D907FE /* Place.swift in Sources */,
 				A3F97BEA1F6544AE00D907FE /* AppDelegate.swift in Sources */,
 				A3F97BFC1F65473B00D907FE /* PlacesTableViewController.swift in Sources */,
+				A3F97C001F654C3600D907FE /* PlaceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

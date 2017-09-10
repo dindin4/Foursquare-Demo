@@ -10,13 +10,13 @@ import UIKit
 
 class Place: NSObject {
     var name: String!
-    var rating: Int!
+    var rating: Double!
     var ratingColor: UIColor!
     var distance: Double!
     var imageUrl: String?
     var category: String!
     
-    init(name:String, rating: Int, ratingHexColor:String, distanceInMetres: Double, imageUrl: String?, category: String) {
+    init(name:String, rating: Double, ratingHexColor:String, distanceInMetres: Double, imageUrl: String?, category: String) {
         self.name = name
         self.rating = rating
         self.ratingColor = UIColor(hex: ratingHexColor)
