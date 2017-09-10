@@ -117,14 +117,14 @@ class PlacesTableViewController: UITableViewController {
                                         distance = distanceInMetres
                                     }
                                     
-                                    if let categories = venue["categories"] as? [NSDictionary] {
+                                    if let categories = venue["categories"] as? [NSDictionary], categories.count > 0 {
                                         let categoryDict = categories[0]
                                         if let categoryName = categoryDict["name"] as? String {
                                             category = categoryName
                                         }
                                     }
                                     
-                                    if let photos = venue["photos"] as? NSDictionary, let photoGroups = photos["groups"] as? [NSDictionary] {
+                                    if let photos = venue["photos"] as? NSDictionary, let photoGroups = photos["groups"] as? [NSDictionary], photoGroups.count > 0 {
                                         if let photoGroupItems = photoGroups[0]["items"] as? [NSDictionary] {
                                             imageUrl = self.constructImageUrl(photoItem: photoGroupItems.first)
                                         }
