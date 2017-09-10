@@ -112,7 +112,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Search" id="wdM-N2-vKd">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="ESf-8a-Glf">
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="ESf-8a-Glf">
                             <connections>
                                 <action selector="filterResults:" destination="IG9-Ll-Cjt" id="nnt-FV-LU5"/>
                             </connections>

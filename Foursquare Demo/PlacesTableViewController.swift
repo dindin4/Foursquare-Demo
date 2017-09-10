@@ -20,8 +20,7 @@ class PlacesTableViewController: UITableViewController {
         
         searchBar.delegate = self
         searchBar.returnKeyType = UIReturnKeyType.done
-        filterButton.isEnabled = false
-
+        
         self.cache = NSCache()
     }
     
@@ -32,6 +31,8 @@ class PlacesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.filterButton.isEnabled = places.count > 1
+        
         return places.count
     }
     
@@ -146,7 +147,7 @@ class PlacesTableViewController: UITableViewController {
             } catch {
                 print(error)
             }
-        }.resume()
+            }.resume()
     }
     
     func constructImageUrl(photoItem: NSDictionary?) -> String? {
@@ -162,12 +163,30 @@ class PlacesTableViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func filterResults(_ sender: Any) {
-        print("Filter Pressed")
+        let alertController = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let distanceAction = UIAlertAction(title: "Distance", style: .default) { (action) in
+            self.places.sort(by: { (placeA, placeB) -> Bool in
+                return placeA.distance < placeB.distance
+            })
+            self.tableView.reloadData()
+        }
+        let ratingButton = UIAlertAction(title: "Rating", style: .default) { (action) in
+            self.places.sort(by: { (placeA, placeB) -> Bool in
+                return placeA.rating > placeB.rating
+            })
+            self.tableView.reloadData()
+        }
+        
+        alertController.addAction(distanceAction)
+        alertController.addAction(ratingButton)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
 
-   // MARK: - UISearchbar delegate
+// MARK: - UISearchbar delegate
 extension PlacesTableViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -180,7 +199,7 @@ extension PlacesTableViewController: UISearchBarDelegate{
         let trimmedString = query.trimmingCharacters(in: .whitespacesAndNewlines)
         let encodedQuery = trimmedString.components(separatedBy: " ").filter {
             !$0.isEmpty
-        }.joined(separator: "+")
+            }.joined(separator: "+")
         
         self.fetchPlaces(query: encodedQuery)
     }
