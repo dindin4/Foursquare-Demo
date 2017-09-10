@@ -176,6 +176,12 @@ extension PlacesTableViewController: UISearchBarDelegate{
         guard let query = searchBar.text, !query.isEmpty else {
             return
         }
-        self.fetchPlaces(query: query)
+        
+        let trimmedString = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        let encodedQuery = trimmedString.components(separatedBy: " ").filter {
+            !$0.isEmpty
+        }.joined(separator: "+")
+        
+        self.fetchPlaces(query: encodedQuery)
     }
 }
